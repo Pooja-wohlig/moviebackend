@@ -1663,6 +1663,41 @@ class Site extends CI_Controller
             $iscommingsoon=$this->input->get_post("iscommingsoon");
             $genre=$this->input->get_post("genre");
             
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'mp4|3gp|flv|mp3';
             $this->load->library('upload', $config);
@@ -1744,7 +1779,48 @@ class Site extends CI_Controller
             $isintheator=$this->input->get_post("isintheator");
             $iscommingsoon=$this->input->get_post("iscommingsoon");
             $genre=$this->input->get_post("genre");
+            $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
             
+            if($image=="")
+            {
+            $image=$this->user_model->getuserimagebyid($id);
+               // print_r($image);
+                $image=$image->image;
+            }
+			
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'mp4|3gp|flv|mp3';
             $this->load->library('upload', $config);

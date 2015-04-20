@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class movie_model extends CI_Model
 {
-    public function create($name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre)
+    public function create($name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre,$image)
     {
         $data=array(
             "name" => $name,
@@ -18,7 +18,8 @@ class movie_model extends CI_Model
             "trailer" => $trailer,
             "isfeatured" => $isfeatured,
             "isintheator" => $isintheator,
-            "iscommingsoon" => $iscommingsoon
+            "iscommingsoon" => $iscommingsoon,
+			"image" => $image
         );
         $query=$this->db->insert( "movie_movie", $data );
         $movieid=$this->db->insert_id();
@@ -55,9 +56,9 @@ class movie_model extends CI_Model
         $query=$this->db->get("movie_movie")->row();
         return $query;
     }
-    public function edit($id,$name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre)
+    public function edit($id,$name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre,$image)
     {
-        $data=array("name" => $name,"duration" => $duration,"dateofrelease" => $dateofrelease,"rating" => $rating,"director" => $director,"writer" => $writer,"casteandcrew" => $casteandcrew,"summary" => $summary,"twittertrack" => $twittertrack,"trailer" => $trailer,"isfeatured" => $isfeatured,"isintheator" => $isintheator,"iscommingsoon" => $iscommingsoon);
+        $data=array("name" => $name,"duration" => $duration,"dateofrelease" => $dateofrelease,"rating" => $rating,"director" => $director,"writer" => $writer,"casteandcrew" => $casteandcrew,"summary" => $summary,"twittertrack" => $twittertrack,"trailer" => $trailer,"isfeatured" => $isfeatured,"isintheator" => $isintheator,"iscommingsoon" => $iscommingsoon,"image" => $image);
         $this->db->where( "id", $id );
         $query=$this->db->update( "movie_movie", $data );
         $querydelete=$this->db->query("DELETE FROM `moviegenre` WHERE `movie`='$id'");
