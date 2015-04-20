@@ -279,21 +279,22 @@ class User_model extends CI_Model
     function login($email,$password) 
     {
         $password=md5($password);
-        $query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email' AND `password`= '$password'");
+        $query=$this->db->query("SELECT * FROM `user` WHERE `email`='$email' AND `password`= '$password'");
         if($query->num_rows > 0)
         {
             $user=$query->row();
-            $user=$user->id;
-            
+//            $user=$user->id;
+//            
             $newdata = array(
-                'email'     => $email,
-                'logged_in' => true,
-                'id'=> $user
+				'name' => $user->name,
+                'email' => $user->email,
+                'password' => $user->password,
+                'id'=> $user->id
             );
 
             $this->session->set_userdata($newdata);
             //print_r($newdata);
-            return $user;
+            return $newdata;
         }
         else
         return false;
