@@ -42,7 +42,7 @@ public function isfeatured(){
 public function moviedetails($movieid){
 //$query['moviedetails']=$this->db->query("SELECT `id`, `name`, `duration`, `dateofrelease`, `rating`, `director`, `writer`, `casteandcrew`, `summary`, `twittertrack`, `trailer`, `isfeatured`, `iscommingsoon`, `isintheator` FROM `movie_movie` WHERE `id`='$movieid'")->result();
 	
-	$query['description']=$this->db->query("SELECT `id`, `name`, `duration`, `dateofrelease`, `rating`, `director`, `writer`, `casteandcrew`, `summary`, `twittertrack`, `trailer`, `isfeatured`,`image`,`iscommingsoon`, `isintheator` FROM `movie_movie` WHERE `id`='$movieid'")->row();
+	$query['description']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`moviegenre`.`genre`,`movie_genre`.`name` FROM `movie_movie` LEFT OUTER JOIN `moviegenre` ON `moviegenre`.`movie`=`movie_movie`.`id` LEFT OUTER JOIN `movie_genre` ON `movie_genre`.`id`=`moviegenre`.`genre` WHERE `movie_movie`.`id`='$movieid'")->row();
 	
 	$query['expertrating']=$this->db->query("SELECT `movie_expert`.`name`,`movie_expertrating`.`movie`,`movie_expertrating`.`rating` FROM `movie_expert` LEFT OUTER JOIN `movie_expertrating` ON `movie_expertrating`.`expert`=`movie_expert`.`id` WHERE `movie_expertrating`.`movie`='$movieid'")->result();
 	
