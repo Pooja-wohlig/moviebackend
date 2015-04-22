@@ -276,10 +276,10 @@ class User_model extends CI_Model
         
         
     }
-    function login($email,$password) 
+    function login($email) 
     {
         $password=md5($password);
-        $query=$this->db->query("SELECT * FROM `user` WHERE `email`='$email' AND `password`= '$password'");
+        $query=$this->db->query("SELECT * FROM `user` WHERE `email`='$email'");
         if($query->num_rows > 0)
         {
             $user=$query->row();
@@ -288,7 +288,7 @@ class User_model extends CI_Model
             $newdata = array(
 				'name' => $user->name,
                 'email' => $user->email,
-                'password' => $user->password,
+//                'password' => $user->password,
                 'id'=> $user->id
             );
 

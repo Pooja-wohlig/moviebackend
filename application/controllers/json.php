@@ -468,8 +468,8 @@ $this->load->view("json",$data);
    public function login()
    {
         $email=$this->input->get("email");
-        $password=$this->input->get("password");
-        $data['message']=$this->user_model->login($email,$password);
+//        $password=$this->input->get("password");
+        $data['message']=$this->user_model->login($email);
         $this->load->view('json',$data);
     }
     public function logout()
