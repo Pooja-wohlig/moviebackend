@@ -152,8 +152,8 @@ $this->load->view("json",$data);
 }
 public function getsingleusercomment()
 {
-$id=$this->input->get_post("id");
-$data["message"]=$this->usercomment_model->getsingleusercomment($id);
+$user=$this->input->get_post("user");
+$data["message"]=$this->usercomment_model->getsingleusercomment($user);
 $this->load->view("json",$data);
 }
 function getalluserrecommend()

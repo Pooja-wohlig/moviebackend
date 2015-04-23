@@ -19,9 +19,9 @@ class usercomment_model extends CI_Model
         $query=$this->db->get("movie_usercomment")->row();
         return $query;
     }
-    function getsingleusercomment($id)
+    function getsingleusercomment($user)
     {
-        $this->db->where("id",$id);
+        $this->db->where("user",$user);
         $query=$this->db->get("movie_usercomment")->row();
         return $query;
     }
