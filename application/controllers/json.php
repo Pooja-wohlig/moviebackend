@@ -506,6 +506,14 @@ $this->load->view("json",$data);
 	 $data['message']=$this->restapi_model->moviedetails($movieid);
 	 $this->load->view('json',$data);
  }
+	public function usercomment(){
+	$movieid=$this->input->get('movie');
+	$comment=$this->input->get('comment');
+	$user=$this->input->get('user');
+	$data['message']=$this->restapi_model->usercomment($movieid, $comment,$user);
+	 $this->load->view('json',$data);
+		
+	}
  
 }
 ?>

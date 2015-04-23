@@ -58,6 +58,14 @@ public function moviedetails($movieid){
 //	$query['recommendtoall']=$this->db->query("SELECT  WHERE `movie`='$movieid'")->result();
 //	return $query;
 //	}
-	
+	public function usercomment($movieid, $comment, $user){
+	 $data=array("user" => $user,"movie" => $movieid,"comment" => $comment);
+$query=$this->db->insert( "movie_usercomment", $data );
+$id=$this->db->insert_id();
+		 if(!$query)
+         return  0;
+		 else
+		return  $id;
+	}
 }
 ?>
