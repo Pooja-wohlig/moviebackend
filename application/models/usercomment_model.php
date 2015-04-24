@@ -22,7 +22,7 @@ class usercomment_model extends CI_Model
     function getsingleusercomment($user)
     {
         $this->db->where("user",$user);
-        $query=$this->db->get("movie_usercomment")->row();
+        $query=$this->db->get("movie_usercomment")->result();
         return $query;
     }
     public function edit($id,$user,$movie,$comment)
