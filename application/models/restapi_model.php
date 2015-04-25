@@ -51,6 +51,8 @@ public function moviedetails($movieid){
 	
 	$query['averagerating']=$this->db->query("SELECT AVG(rating) as `averagerating` FROM `movie_userrate` WHERE `movie`='$movieid'")->row();
 	$query['averagerating']=$query['averagerating']->averagerating;
+	$query['reviews']=$this->db->query("SELECT `movie_review`.`user`,`movie_review`.`review`,`user`.`name` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie`='$movieid'")->result();
+	
 	return $query;
 }
 //	public function recommendtoall($movieid){
