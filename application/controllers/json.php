@@ -526,10 +526,10 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->watched($movieid, $user);
 	 $this->load->view('json',$data);		
 	}
-//	 public function reviews(){
-//	$movieid=$this->input->get('movie');
-//	$data['message']=$this->restapi_model->reviews($movieid);
-//	 $this->load->view('json',$data);		
-//	}
+	 public function twitterfeeds(){
+	$movieid=$this->input->get('movie');
+	$data['message']=$this->restapi_model->twitterfeeds($movieid);
+	 $this->load->view('json',$data);		
+	}
 }
 ?>

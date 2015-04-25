@@ -52,14 +52,20 @@ public function moviedetails($movieid){
 	$query['averagerating']=$this->db->query("SELECT AVG(rating) as `averagerating` FROM `movie_userrate` WHERE `movie`='$movieid'")->row();
 	$query['averagerating']=$query['averagerating']->averagerating;
 	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
-	
-	return $query;
+	return $query;	
+	       
 }
-//	public function recommendtoall($movieid){
-//		
-//	$query['recommendtoall']=$this->db->query("SELECT  WHERE `movie`='$movieid'")->result();
-//	return $query;
-//	}
+	public function twitterfeeds($movieid){
+	 $query1['twittertrack']=$this->db->query("SELECT `twittertrack` FROM `movie_movie` WHERE `id`='$movieid'")->row();
+			$hashstring = $query1['twittertrack']->twittertrack;
+            $this->load->library('twitteroauth');
+            $this->config->load('twitter');
+            $this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->config->item('twitter_access_token'), $this->config->item('twitter_access_secret'));
+            $hashstring = urlencode($hashstring);
+            $data = $this->twitteroauth->get('search/tweets.json?q=' . $hashstring . "&count=20");
+            $prediction = $data;
+	        return $prediction;
+	}
 	public function usercomment($movieid, $comment, $user){
 	 $data=array("user" => $user,"movie" => $movieid,"comment" => $comment);
 $query=$this->db->insert( "movie_usercomment", $data );
