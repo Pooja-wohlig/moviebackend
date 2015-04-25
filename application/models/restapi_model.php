@@ -51,7 +51,7 @@ public function moviedetails($movieid){
 	
 	$query['averagerating']=$this->db->query("SELECT AVG(rating) as `averagerating` FROM `movie_userrate` WHERE `movie`='$movieid'")->row();
 	$query['averagerating']=$query['averagerating']->averagerating;
-	$query['reviews']=$this->db->query("SELECT `movie_review`.`user`,`movie_review`.`review`,`user`.`name` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie`='$movieid'")->result();
+	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
 	
 	return $query;
 }
@@ -92,9 +92,9 @@ $id=$this->db->insert_id();
 		return  $id;
 	
 	}
-	public function reviews($movieid){
-	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
-		return $query;
-	}
+//	public function reviews($movieid){
+//	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
+//		return $query;
+//	}
 }
 ?>
