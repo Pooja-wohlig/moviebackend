@@ -69,5 +69,28 @@ $id=$this->db->insert_id();
 		 else
 		return  $id;
 	}
+	public function userrating($movieid, $user, $rating){
+	$query=$this->db->query("SELECT * FROM `movie_userrate` WHERE `user`='$user' AND `movie`='$movieid'");
+		if($query->num_rows == 0){
+		$data=array("user" => $user,"movie" => $movieid,"rating" => $rating);
+$query=$this->db->insert( "movie_userrate", $data );
+$id=$this->db->insert_id();
+		}
+		else{
+		$query=$this->db->query("UPDATE `movie_userrate` SET `rating` = '$rating' WHERE `user`='$user' AND `movie`='$movieid'");
+		}
+	 
+	}
+	
+	public function watched($movieid, $user){
+	 $data=array("user" => $user,"movie" => $movieid);
+$query=$this->db->insert( "movie_watch", $data );
+$id=$this->db->insert_id();
+		 if(!$query)
+         return  0;
+		 else
+		return  $id;
+	
+	}
 }
 ?>

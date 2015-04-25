@@ -511,9 +511,20 @@ $this->load->view("json",$data);
 	$comment=$this->input->get('comment');
 	$user=$this->input->get('user');
 	$data['message']=$this->restapi_model->usercomment($movieid, $comment,$user);
-	 $this->load->view('json',$data);
-		
+	 $this->load->view('json',$data);		
 	}
- 
+ public function userrating(){
+	$movieid=$this->input->get('movie');
+	$rating=$this->input->get('rating');
+	$user=$this->input->get('user');
+	$data['message']=$this->restapi_model->userrating($movieid, $user, $rating);
+	 $this->load->view('json',$data);		
+	}
+	 public function watched(){
+	$movieid=$this->input->get('movie');
+	$user=$this->input->get('user');
+	$data['message']=$this->restapi_model->watched($movieid, $user);
+	 $this->load->view('json',$data);		
+	}
 }
 ?>
