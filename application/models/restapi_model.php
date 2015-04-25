@@ -92,5 +92,9 @@ $id=$this->db->insert_id();
 		return  $id;
 	
 	}
+	public function reviews($movieid){
+	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
+		return $query;
+	}
 }
 ?>
