@@ -286,6 +286,7 @@ class User_model extends CI_Model
 //            $user=$user->id;
 //            
             $newdata = array(
+                'logged_in' => 'true',
 				'name' => $user->name,
                 'email' => $user->email,
 //                'password' => $user->password,
@@ -302,13 +303,13 @@ class User_model extends CI_Model
 
     }
     function authenticate() {
-        $is_logged_in = $this->session->userdata( 'logged_in' );
-        //print_r($is_logged_in);
-        if ( $is_logged_in !== 'true' || !isset( $is_logged_in ) ) {
+        $is_logged_in = $this->session->userdata('logged_in');
+//        print_r($is_logged_in);
+        if ( $is_logged_in !== 'true' || !isset($is_logged_in)) {
             return false;
         } //$is_logged_in !== 'true' || !isset( $is_logged_in )
         else {
-            $userid = $this->session->userdata( 'id' );
+            $userid = $this->session->all_userdata();
          return $userid;
         }
     }
