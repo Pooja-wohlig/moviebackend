@@ -472,6 +472,11 @@ $this->load->view("json",$data);
         $data['message']=$this->user_model->login($email);
         $this->load->view('json',$data);
     }
+	 public function authenticate()
+    {
+        $data['message']=$this->user_model->authenticate();
+		$this->load->view('json',$data);
+    }
     public function logout()
     {
         $this->session->sess_destroy();
