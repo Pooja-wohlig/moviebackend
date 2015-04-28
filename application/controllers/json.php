@@ -477,6 +477,16 @@ $this->load->view("json",$data);
         $data['message']=$this->user_model->authenticate();
 		$this->load->view('json',$data);
     }
+	public function forgotpassword(){
+	$email=$this->input->get("email");
+		$this->restapi_model->forgotpassword($email);
+	}
+	public function changepassword(){
+	$userid=$this->input->get_post("id");    
+        $newpassword=$this->input->get_post("newpassword");
+        $confirmpassword=$this->input->get_post("confirmpassword");
+		$this->restapi_model->setpassword($userid,$newpassword,$confirmpassword);
+	}
     public function logout()
     {
         $this->session->sess_destroy();
@@ -536,5 +546,7 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->twitterfeeds($movieid);
 	 $this->load->view('json',$data);		
 	}
+	
+	
 }
 ?>

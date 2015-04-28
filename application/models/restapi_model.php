@@ -98,6 +98,30 @@ $id=$this->db->insert_id();
 		return  $id;
 	
 	}
+	public function forgotpassword($email){
+	$query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email'");
+//		echo $query->num_rows;
+//		return 0;
+		if($query->num_rows == 0){
+			
+			echo "in if";
+//		return 0;
+		}
+		else{
+		$this->load->library('email');
+			$this->email->from('pthakare33@gmail.com', 'Pooja');
+			$this->email->to($email); 
+			$this->email->subject('Password Change');
+			$this->email->message('hiiiiiiii');	
+			$this->email->send();
+			echo $this->email->print_debugger();
+		}
+	}
+	public function setpassword($userid,$newpassword,$confirmpassword){
+	if($newpassword==$confirmpassword){
+	return 1;
+	}
+	}
 //	public function reviews($movieid){
 //	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
 //		return $query;
