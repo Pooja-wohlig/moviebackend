@@ -1708,7 +1708,7 @@ class Site extends CI_Controller
                 $uploaddata = $this->upload->data();
                 $trailer=$uploaddata['file_name'];
             }
-            if($this->movie_model->create($name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre)==0)
+            if($this->movie_model->create($name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre,$image)==0)
                 $data["alerterror"]="New movie could not be created.";
             else
                 $data["alertsuccess"]="movie created Successfully.";
@@ -1839,7 +1839,7 @@ class Site extends CI_Controller
                 $trailer=$trailer->trailer;
             }
             
-            if($this->movie_model->edit($id,$name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre)==0)
+            if($this->movie_model->edit($id,$name,$duration,$dateofrelease,$rating,$director,$writer,$casteandcrew,$summary,$twittertrack,$trailer,$isfeatured,$isintheator,$iscommingsoon,$genre,$image)==0)
                 $data["alerterror"]="New movie could not be Updated.";
             else
                 $data["alertsuccess"]="movie Updated Successfully.";
