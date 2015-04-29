@@ -546,7 +546,11 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->twitterfeeds($movieid);
 	 $this->load->view('json',$data);		
 	}
-	
+	public function moviesearch(){
+	$moviename=$this->input->get('moviename');
+	$data['message']=$this->restapi_model->moviesearch($moviename);
+	 $this->load->view('json',$data);
+	}
 	
 }
 ?>

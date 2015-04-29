@@ -122,9 +122,11 @@ $id=$this->db->insert_id();
 	return 1;
 	}
 	}
-//	public function reviews($movieid){
-//	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();
-//		return $query;
-//	}
+	
+	public function moviesearch($moviename){
+		
+	$query['moviesearch']=$this->db->query("SELECT `id`, `name`, `image`, `duration`, `dateofrelease`, `rating`, `director`, `writer`, `casteandcrew`, `summary`, `twittertrack`, `trailer`, `isfeatured`, `iscommingsoon`, `isintheator` FROM `movie_movie` WHERE `name` LIKE '%$moviename%'")->result();
+		return $query;
+	}
 }
 ?>
