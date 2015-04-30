@@ -481,12 +481,30 @@ $this->load->view("json",$data);
 	$email=$this->input->get("email");
 		$this->restapi_model->forgotpassword($email);
 	}
-	public function changepassword(){
-	$userid=$this->input->get_post("id");    
-        $newpassword=$this->input->get_post("newpassword");
-        $confirmpassword=$this->input->get_post("confirmpassword");
-		$this->restapi_model->setpassword($userid,$newpassword,$confirmpassword);
+//	public function changepassword(){
+//	$userid=$this->input->get_post("id");    
+//        $newpassword=$this->input->get_post("newpassword");
+//        $confirmpassword=$this->input->get_post("confirmpassword");
+//		$this->restapi_model->setpassword($userid,$newpassword,$confirmpassword);
+//	}
+	
+	 public function changepassword()
+ {
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('password','Old Password','required|trim|xss_clean|callback_change');
+    $this->form_validation->set_rules('newpassword','New Password','required|trim');
+    $this->form_validation->set_rules('confirmpassword','Confirm Password','required|trim|matches[npassword]');
+    if ($this->form_validation->run() == FALSE)
+    {    
+     echo validation_errors();
 	}
+    }
+     public function change() // we will load models here to check with database
+  {
+		 $id=$this->input->get('id');
+//     $session_data = $this->session->userdata('logged_in');
+     $this->restapi_model->changepassword($id);
+}
     public function logout()
     {
         $this->session->sess_destroy();
@@ -551,6 +569,10 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->moviesearch($moviename);
 	 $this->load->view('json',$data);
 	}
-	
+	public function ratingtheatresthisweek(){
+	$movieid=$this->input->get('movie');
+	$data['message']=$this->restapi_model->ratingtheatresthisweek($movieid);
+	 $this->load->view('json',$data);
+	}
 }
 ?>
