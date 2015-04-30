@@ -8,10 +8,9 @@ class restapi_model extends CI_Model
 	
 		return $query;
 	}
-	public function ratingtheatresthisweek($movieid){
-	$query['averagerating']=$this->db->query("SELECT AVG(rating) as `averagerating` FROM `movie_userrate` WHERE `movie`='$movieid'")->row();
-	$query['averagerating']=$query['averagerating']->averagerating;
-	return $query;
+	public function allavgrating(){
+	$query['allavgrating']=$this->db->query("SELECT `movie`,AVG(rating) as `avg` FROM `movie_userrate` GROUP BY `movie`")->result();
+		return $query;
 	}
 	
 public function isfeatured(){
@@ -42,6 +41,10 @@ public function isfeatured(){
 		
 		$query['recommendcount']=$this->db->query("SELECT COUNT(`movie_userrecommend`.`recommendfriend`) as `count`,`movie_userrecommend`.`user` FROM `movie_userrecommend` WHERE `movie_userrecommend`.`user`='$user'")->row();
 		$query['recommendcount']=$query['recommendcount']->count;
+		
+		$query['commentcount']=$this->db->query("SELECT count(comment) as `commentcount` FROM `movie_usercomment` WHERE `user`='$user'")->row();
+	$query['commentcount']=$query['commentcount']->commentcount;
+	 $query['comment']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`user`='$user'")->result();
 		return $query;
     }
   
@@ -60,9 +63,7 @@ public function moviedetails($movieid){
 	$query['averagerating']=$this->db->query("SELECT AVG(rating) as `averagerating` FROM `movie_userrate` WHERE `movie`='$movieid'")->row();
 	$query['averagerating']=$query['averagerating']->averagerating;
 	$query['reviews']=$this->db->query("SELECT `user`.`name`,`movie_review`.`review` FROM `user` LEFT OUTER JOIN `movie_review` ON `movie_review`.`user`=`user`.`id` WHERE `movie_review`.`movie`='$movieid'")->result();		
-	$query['commentcount']=$this->db->query("SELECT count(comment) as `commentcount` FROM `movie_usercomment` WHERE `movie`='$movieid'")->row();
-	$query['commentcount']=$query['commentcount']->commentcount;
-	 $query['comment']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`movie`='$movieid'")->result();
+	
 	return $query;
 }
 	public function twitterfeeds($movieid){

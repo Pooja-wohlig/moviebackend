@@ -569,9 +569,8 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->moviesearch($moviename);
 	 $this->load->view('json',$data);
 	}
-	public function ratingtheatresthisweek(){
-	$movieid=$this->input->get('movie');
-	$data['message']=$this->restapi_model->ratingtheatresthisweek($movieid);
+	public function allavgrating(){
+	$data['message']=$this->restapi_model->allavgrating();
 	 $this->load->view('json',$data);
 	}
 }
