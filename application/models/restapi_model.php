@@ -9,7 +9,7 @@ class restapi_model extends CI_Model
 		return $query;
 	}
 	public function allavgrating(){
-	$query['allavgrating']=$this->db->query("SELECT `movie`,AVG(rating) as `avg` FROM `movie_userrate` GROUP BY `movie`")->result();
+	$query['allavgrating']=$this->db->query("SELECT AVG(rating),`movie` FROM `movie_expertrating` GROUP BY `movie`")->result();
 		return $query;
 	}
 	
@@ -44,7 +44,7 @@ public function isfeatured(){
 		
 		$query['commentcount']=$this->db->query("SELECT count(comment) as `commentcount` FROM `movie_usercomment` WHERE `user`='$user'")->row();
 	$query['commentcount']=$query['commentcount']->commentcount;
-	 $query['comment']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`user`='$user'")->result();
+	 $query['comment']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`,(UNIX_TIMESTAMP(`movie_usercomment`.`timestamp`)*1000) as `timestamp`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`user`='$user'")->result();
 		return $query;
     }
   
@@ -139,38 +139,29 @@ $id=$this->db->insert_id();
 	$query['moviesearch']=$this->db->query("SELECT `id`, `name`, `image`, `duration`, `dateofrelease`, `rating`, `director`, `writer`, `casteandcrew`, `summary`, `twittertrack`, `trailer`, `isfeatured`, `iscommingsoon`, `isintheator` FROM `movie_movie` WHERE `name` LIKE '%$moviename%'")->result();
 		return $query;
 	}
-		public function changepassword($id){
-		
-	 $query['$my_info']=$this->db->query("select * from `user` where `id`='$id'")->row();
-     $db_password = $query['$my_info']->password;
-     $db_id = $query['$my_info']->id; 
-     
-     if ((md5($this->input->get_post('password',$db_password)) == $db_password) && ($this->input->get_post('newpassword') != "") && ($this->input->get_post('confirmpassword')!="")) { 
- 
-  $fixed_pw = md5($this->input->post('newpassword'));
- 
-     $query = $this->db->query("Update `user` SET `password`='$fixed_pw' WHERE id=".$db_id); 
-// if($query=='true'){
-// echo "Password Updated!";
-// }
-//		 else{
-//		 echo "Wrong Old Password!";
-//		 }
-		 echo "in if";
-     $this->form_validation->set_message('change','<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>
-<strong>Password Updated!</strong></div>');
-return false;
-   }
-
-    
-   else  {
-$this->form_validation->set_message('change','<div class="alert alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a>
-  <strong>Wrong Old Password!</strong> </div>');
-echo "in else";
-return false;
-
-}
-	
+		public function changepassword($email,$oldpassword,$newpassword,$confirmpassword){
+		 $oldpassword=md5($oldpassword);
+        $newpassword=md5($newpassword);
+        $confirmpassword=md5($confirmpassword);
+			
+			if($newpassword==$confirmpassword){
+        $useridquery=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email' AND `password`='$oldpassword'");
+//			echo $useridquery;
+        if($useridquery->num_rows()==0)
+        {
+            return 0;
+        }
+        else
+        {
+            $query=$useridquery->row();
+            $userid=$query->id;
+            $updatequery=$this->db->query("UPDATE `user` SET `password`='$newpassword' WHERE `id`='$userid'");
+            return 1;
+        }
+			}
+			else{
+			echo "Mismatch";
+			}
 	 }
 }
 ?>

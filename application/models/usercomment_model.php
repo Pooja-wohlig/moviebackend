@@ -21,13 +21,12 @@ class usercomment_model extends CI_Model
     }
     function getsingleusercomment($user)
     {
-        $this->db->where("user",$user);
-        $query=$this->db->get("movie_usercomment")->result();
-        return $query;
+       $query['usercomment']=$this->db->query("SELECT (UNIX_TIMESTAMP(timestamp)*1000) as `timestamp`,`user`,`movie`,`comment` FROM `movie_usercomment` WHERE `user`='$user'")->result();
+		return $query;
     }
-    public function edit($id,$user,$movie,$comment)
+    public function edit($id,$user,$movie,$comment,$timestamp)
     {
-        $data=array("user" => $user,"movie" => $movie,"comment" => $comment);
+        $data=array("user" => $user,"movie" => $movie,"comment" => $comment,"timestamp" => $timestamp);
         $this->db->where( "id", $id );
         $query=$this->db->update( "movie_usercomment", $data );
         return 1;

@@ -1090,6 +1090,12 @@ class Site extends CI_Controller
         $elements[4]->sort="1";
         $elements[4]->header="Moviename";
         $elements[4]->alias="moviename";
+		
+		$elements[5]=new stdClass();
+        $elements[5]->field="`movie_usercomment`.`timestamp`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Timestamp";
+        $elements[5]->alias="timestamp";
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
@@ -1127,6 +1133,7 @@ class Site extends CI_Controller
         $this->form_validation->set_rules("user","User","trim");
         $this->form_validation->set_rules("movie","Movie","trim");
         $this->form_validation->set_rules("comment","Comment","trim");
+//        $this->form_validation->set_rules("timestamp","Timestamp","trim");
         if($this->form_validation->run()==FALSE)
         {
             $data["alerterror"]=validation_errors();
@@ -1141,6 +1148,7 @@ class Site extends CI_Controller
             $user=$this->input->get_post("user");
             $movie=$this->input->get_post("movie");
             $comment=$this->input->get_post("comment");
+//            $timestamp=$this->input->get_post("timestamp");
             if($this->usercomment_model->create($user,$movie,$comment)==0)
                 $data["alerterror"]="New usercomment could not be created.";
             else
@@ -1169,6 +1177,7 @@ class Site extends CI_Controller
         $this->form_validation->set_rules("user","User","trim");
         $this->form_validation->set_rules("movie","Movie","trim");
         $this->form_validation->set_rules("comment","Comment","trim");
+        $this->form_validation->set_rules("timestamp","Timestamp","trim");
         if($this->form_validation->run()==FALSE)
         {
             $data["alerterror"]=validation_errors();
@@ -1186,7 +1195,8 @@ class Site extends CI_Controller
             $user=$this->input->get_post("user");
             $movie=$this->input->get_post("movie");
             $comment=$this->input->get_post("comment");
-            if($this->usercomment_model->edit($id,$user,$movie,$comment)==0)
+            $timestamp=$this->input->get_post("timestamp");
+            if($this->usercomment_model->edit($id,$user,$movie,$comment,$timestamp)==0)
                 $data["alerterror"]="New usercomment could not be Updated.";
             else
                 $data["alertsuccess"]="usercomment Updated Successfully.";
