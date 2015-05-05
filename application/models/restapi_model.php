@@ -9,7 +9,7 @@ class restapi_model extends CI_Model
 		return $query;
 	}
 	public function allavgrating(){
-	$query['allavgrating']=$this->db->query("SELECT AVG(rating),`movie` FROM `movie_expertrating` GROUP BY `movie`")->result();
+	$query['allavgrating']=$this->db->query("SELECT `movie`,AVG(`rating`) as avg FROM `movie_expertrating` GROUP BY `movie`")->result();
 		return $query;
 	}
 	

@@ -9,21 +9,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_userlike`.`user`";
 $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_userlike`.`movie`";
 $elements[2]->sort="1";
 $elements[2]->header="Movie";
 $elements[2]->alias="movie";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_userlike`.`status`";
 $elements[3]->sort="1";
@@ -61,21 +58,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_userrate`.`user`";
 $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_userrate`.`movie`";
 $elements[2]->sort="1";
 $elements[2]->header="Movie";
 $elements[2]->alias="movie";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_userrate`.`rating`";
 $elements[3]->sort="1";
@@ -113,21 +107,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_usercomment`.`user`";
 $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_usercomment`.`movie`";
 $elements[2]->sort="1";
 $elements[2]->header="Movie";
 $elements[2]->alias="movie";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_usercomment`.`comment`";
 $elements[3]->sort="1";
@@ -165,21 +156,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_userrecommend`.`user`";
 $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_userrecommend`.`movie`";
 $elements[2]->sort="1";
 $elements[2]->header="Movie";
 $elements[2]->alias="movie";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_userrecommend`.`recommendfriend`";
 $elements[3]->sort="1";
@@ -217,7 +205,6 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_genre`.`name`";
 $elements[1]->sort="1";
@@ -255,91 +242,78 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_movie`.`name`";
 $elements[1]->sort="1";
 $elements[1]->header="Name";
 $elements[1]->alias="name";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_movie`.`duration`";
 $elements[2]->sort="1";
 $elements[2]->header="Duration";
 $elements[2]->alias="duration";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_movie`.`dateofrelease`";
 $elements[3]->sort="1";
 $elements[3]->header="Dateofrelease";
 $elements[3]->alias="dateofrelease";
 
-$elements=array();
 $elements[4]=new stdClass();
 $elements[4]->field="`movie_movie`.`rating`";
 $elements[4]->sort="1";
 $elements[4]->header="Rating";
 $elements[4]->alias="rating";
 
-$elements=array();
 $elements[5]=new stdClass();
 $elements[5]->field="`movie_movie`.`director`";
 $elements[5]->sort="1";
 $elements[5]->header="Director";
 $elements[5]->alias="director";
 
-$elements=array();
 $elements[6]=new stdClass();
 $elements[6]->field="`movie_movie`.`writer`";
 $elements[6]->sort="1";
 $elements[6]->header="Writer";
 $elements[6]->alias="writer";
 
-$elements=array();
 $elements[7]=new stdClass();
 $elements[7]->field="`movie_movie`.`casteandcrew`";
 $elements[7]->sort="1";
 $elements[7]->header="Casteandcrew";
 $elements[7]->alias="casteandcrew";
 
-$elements=array();
 $elements[8]=new stdClass();
 $elements[8]->field="`movie_movie`.`summary`";
 $elements[8]->sort="1";
 $elements[8]->header="Summary";
 $elements[8]->alias="summary";
 
-$elements=array();
 $elements[9]=new stdClass();
 $elements[9]->field="`movie_movie`.`twittertrack`";
 $elements[9]->sort="1";
 $elements[9]->header="Twittertrack";
 $elements[9]->alias="twittertrack";
 
-$elements=array();
 $elements[10]=new stdClass();
 $elements[10]->field="`movie_movie`.`trailer`";
 $elements[10]->sort="1";
 $elements[10]->header="Trailer";
 $elements[10]->alias="trailer";
 
-$elements=array();
 $elements[11]=new stdClass();
 $elements[11]->field="`movie_movie`.`isfeatured`";
 $elements[11]->sort="1";
 $elements[11]->header="Isfeatured";
 $elements[11]->alias="isfeatured";
 
-$elements=array();
 $elements[12]=new stdClass();
 $elements[12]->field="`movie_movie`.`isintheator`";
 $elements[12]->sort="1";
 $elements[12]->header="Isintheator";
 $elements[12]->alias="isintheator";
 
-$elements=array();
 $elements[13]=new stdClass();
 $elements[13]->field="`movie_movie`.`iscommingsoon`";
 $elements[13]->sort="1";
@@ -377,14 +351,12 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_expert`.`name`";
 $elements[1]->sort="1";
 $elements[1]->header="Name";
 $elements[1]->alias="name";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_expert`.`status`";
 $elements[2]->sort="1";
@@ -422,21 +394,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`movie_expertrating`.`expert`";
 $elements[1]->sort="1";
 $elements[1]->header="Expert";
 $elements[1]->alias="expert";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`movie_expertrating`.`movie`";
 $elements[2]->sort="1";
 $elements[2]->header="Movie";
 $elements[2]->alias="movie";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`movie_expertrating`.`rating`";
 $elements[3]->sort="1";
@@ -480,16 +449,9 @@ $this->load->view("json",$data);
 	public function forgotpassword(){
 	$email=$this->input->get("email");
 		$this->restapi_model->forgotpassword($email);
-	}
+	}	
 	
-	  function changepassword() {
-        $email=$this->input->get("email");
-        $oldpassword=$this->input->get("oldpassword");
-        $newpassword=$this->input->get("newpassword");
-        $confirmpassword=$this->input->get("confirmpassword");
-        $data["message"] = $this->restapi_model->changepassword($email,$oldpassword,$newpassword,$confirmpassword);
-        $this->load->view("json", $data);
-    }
+	 
     public function logout()
     {
         $this->session->sess_destroy();
@@ -554,10 +516,17 @@ $this->load->view("json",$data);
 	$data['message']=$this->restapi_model->moviesearch($moviename);
 	 $this->load->view('json',$data);
 	}
-	public function allavgrating(){
+		public function allavgrating(){
 	$data['message']=$this->restapi_model->allavgrating();
 	 $this->load->view('json',$data);
 	}
-	
+        public function changepassword() {
+        $email=$this->input->get("email");
+        $oldpassword=$this->input->get("oldpassword");
+        $newpassword=$this->input->get("newpassword");
+        $confirmpassword=$this->input->get("confirmpassword");
+        $data["message"] = $this->restapi_model->changepassword($email,$oldpassword,$newpassword,$confirmpassword);
+        $this->load->view("json", $data);
+    }
 }
 ?>

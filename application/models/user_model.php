@@ -277,8 +277,8 @@ class User_model extends CI_Model
         
     }
     function login($email) 
-    {
-        $password=md5($password);
+    { 
+$password=md5($password);
         $query=$this->db->query("SELECT * FROM `user` WHERE `email`='$email'");
         if($query->num_rows > 0)
         {
@@ -287,10 +287,11 @@ class User_model extends CI_Model
 //            
             $newdata = array(
                 'logged_in' => 'true',
-				'name' => $user->name,
+	        'name' => $user->name,
                 'email' => $user->email,
-//                'password' => $user->password,
+                'image' => $user->image,
                 'id'=> $user->id
+
             );
 
             $this->session->set_userdata($newdata);
@@ -303,7 +304,7 @@ class User_model extends CI_Model
 
     }
     function authenticate() {
-        $is_logged_in = $this->session->userdata('logged_in');
+       $is_logged_in = $this->session->userdata('logged_in');
 //        print_r($is_logged_in);
         if ( $is_logged_in !== 'true' || !isset($is_logged_in)) {
             return false;
@@ -479,7 +480,7 @@ class User_model extends CI_Model
             $newdata = array(
                 'email'     => $user_profile->email,
                 'password' => "",
-                'logged_in' => true,
+                'logged_in' => 'true',
                 'id'=> $id,
                 'name'=> $user_profile->displayName,
                 'image'=> $user_profile->photoURL,
@@ -497,7 +498,7 @@ class User_model extends CI_Model
             $newdata = array(
                 'email'     => $user_profile->email,
                 'password' => "",
-                'logged_in' => true,
+                'logged_in' => 'true',
                 'id'=> $query->id,
                 'name'=> $user_profile->displayName,
                 'image'=> $user_profile->photoURL,

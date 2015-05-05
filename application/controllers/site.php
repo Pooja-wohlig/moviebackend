@@ -2005,6 +2005,9 @@ class Site extends CI_Controller
         $data["page"]="viewexpertrating";
         $data["page2"]="block/movieblock";
         $movieid=$this->input->get('id');
+		$data['rating']=$this->expertrating_model->getratingdropdown();
+		$data['table']=$this->expertrating_model->viewexpertrating();
+//		$data['expert']=$this->expert_model->getexpertdropdown();
         $data["before"]=$this->movie_model->beforeedit($this->input->get("id"));
         $data["base_url"]=site_url("site/viewexpertratingjson?id=".$movieid);
         $data["title"]="View expertrating";
@@ -2078,31 +2081,40 @@ class Site extends CI_Controller
     {
         $access=array("1");
         $this->checkaccess($access);
-        $this->form_validation->set_rules("expert","Expert","trim");
-        $this->form_validation->set_rules("movie","Movie","trim");
-        $this->form_validation->set_rules("rating","Rating","trim");
-        if($this->form_validation->run()==FALSE)
-        {
-            $access=array("1");
-            $this->checkaccess($access);
-            $data["page"]="createexpertrating";
-            $data["title"]="Create expertrating";
-            $data['expert']=$this->expert_model->getexpertdropdown();
-            $data['movieid']=$this->input->post('movie');
-            $this->load->view("template",$data);
-        }
-        else
-        {
-            $expert=$this->input->get_post("expert");
-            $movie=$this->input->get_post("movie");
-            $rating=$this->input->get_post("rating");
-            if($this->expertrating_model->create($expert,$movie,$rating)==0)
-                $data["alerterror"]="New expertrating could not be created.";
-            else
-                $data["alertsuccess"]="expertrating created Successfully.";
-            $data["redirect"]="site/viewexpertrating?id=".$movie;
-            $this->load->view("redirect2",$data);
-        }
+		$expert=$this->input->post('expert');
+		$rating=$this->input->post('rating');
+		print_r($rating);
+		print_r($expert);
+//		foreach($rating as $key=>$rate)
+//		{
+//			$this->expertrating_model->insertdata($rate,$expert[$key],$movie);
+//		}
+//        $this->form_validation->set_rules("expert","Expert","trim");
+//        $this->form_validation->set_rules("movie","Movie","trim");
+//        $this->form_validation->set_rules("rating","Rating","trim");
+//        if($this->form_validation->run()==FALSE)
+//        {
+//            $access=array("1");
+//            $this->checkaccess($access);
+////            $data["page"]="createexpertrating";
+////            $data["title"]="Create expertrating";
+//            $data['expert']=$this->expert_model->getexpertdropdown();
+//            $data['movieid']=$this->input->post('movie');
+//            $this->load->view("template",$data);
+//        }
+//        else
+//        {
+//            $expert=$this->input->get_post("expert");
+//			print_r($expert);
+//            $movie=$this->input->get('id');
+//            $rating=$this->input->get_post("rating");
+//            if($this->expertrating_model->create($expert,$movie,$rating)==0)
+//                $data["alerterror"]="New expertrating could not be created.";
+//            else
+//                $data["alertsuccess"]="expertrating created Successfully.";
+//            $data["redirect"]="site/viewexpertrating?id=".$movie;
+//            $this->load->view("redirect2",$data);
+//        }
     }
     public function editexpertrating()
     {
