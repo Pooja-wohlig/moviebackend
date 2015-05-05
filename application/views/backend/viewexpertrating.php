@@ -4,7 +4,7 @@
 			<header class="panel-heading">
 				expertrating Details
 			</header>
-			<form form class='form-horizontal tasi-form' method='post' action='<?php echo site_url("site/createexpertratingsubmit");?>' enctype='multipart/form-data'>
+			<form form class='form-horizontal tasi-form' method='post' action='<?php echo site_url("site/createexpertratingsubmit?id=").$this->input->get('id');?>' enctype='multipart/form-data'>
 			<table class="table table-striped table-hover" id="" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
@@ -20,7 +20,7 @@
 foreach($table as $row){ 
 					?>
 					<tr>
-						<td><?php echo $row->id; ?></td>
+						<td><?php echo $row->id;?></td>
 						<td><?php echo $row->name;?><input type="hidden" name="expert[]" value="<?php echo $row->id; ?>"></td>
 						<td><?php echo form_dropdown("rating[]",$rating,set_value('rating'));?></td>
 					</tr>

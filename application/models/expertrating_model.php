@@ -39,7 +39,7 @@ class expertrating_model extends CI_Model
     }
 	  public function getratingdropdown()
 	{
-		$rating= array("0","0.5","1","1.5","2","2.5","3","3.5","4","4.5","5");
+		$rating= array("0"=>"0","0.5"=>"0.5","1"=>"1","1.5"=>"1.5","2"=>"2","2.5"=>"2.5","3"=>"3","3.5"=>"3.5","4"=>"4","4.5"=>"4.5","5"=>"5");
 		return $rating;
 	}
 	 public function viewexpertrating()
@@ -54,10 +54,15 @@ class expertrating_model extends CI_Model
 //		 print_r($query);
 		return $query;
 	}
-//	public function insertdata($rating,$expert[$key],$movie) {
-//		for($i=0;i<expert[].length;$i++){
-//			
-//		}
-//	}
+	public function insertdata($rating,$expert,$movie) {
+		 $query=$this->db->query("DELETE FROM `movie_expertrating` WHERE `expert`='$expert' AND `movie`='$movie'");
+		$data  = array(
+			"rating"=>$rating,
+			"expert"=>$expert,
+			"movie"=>$movie
+		);
+		$query=$this->db->insert( 'movie_expertrating', $data );
+		return  1;
+	}
 }
 ?>

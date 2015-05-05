@@ -2081,14 +2081,22 @@ class Site extends CI_Controller
     {
         $access=array("1");
         $this->checkaccess($access);
+		$movie=$this->input->get('id');
 		$expert=$this->input->post('expert');
 		$rating=$this->input->post('rating');
-		print_r($rating);
-		print_r($expert);
-//		foreach($rating as $key=>$rate)
-//		{
-//			$this->expertrating_model->insertdata($rate,$expert[$key],$movie);
-//		}
+//		print_r($rating);
+//		print_r($expert);
+		foreach($rating as $key=>$rate)
+		{
+			$this->expertrating_model->insertdata($rate,$expert[$key],$movie);
+		}
+		 if($this->expertrating_model->insertdata($rate,$expert[$key],$movie)==0)
+                $data["alerterror"]="New expertrating could not be created.";
+            else
+			$data["alertsuccess"]="expertrating created Successfully.";
+            $data["redirect"]="site/viewexpertrating?id=".$movie;
+            $this->load->view("redirect2",$data);
+        }
 //        $this->form_validation->set_rules("expert","Expert","trim");
 //        $this->form_validation->set_rules("movie","Movie","trim");
 //        $this->form_validation->set_rules("rating","Rating","trim");
@@ -2115,7 +2123,7 @@ class Site extends CI_Controller
 //            $data["redirect"]="site/viewexpertrating?id=".$movie;
 //            $this->load->view("redirect2",$data);
 //        }
-    }
+//    }
     public function editexpertrating()
     {
         $access=array("1");
