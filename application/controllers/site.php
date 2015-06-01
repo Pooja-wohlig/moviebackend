@@ -2084,8 +2084,6 @@ class Site extends CI_Controller
 		$movie=$this->input->get('id');
 		$expert=$this->input->post('expert');
 		$rating=$this->input->post('rating');
-//		print_r($rating);
-//		print_r($expert);
 		foreach($rating as $key=>$rate)
 		{
 			$this->expertrating_model->insertdata($rate,$expert[$key],$movie);

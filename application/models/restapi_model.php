@@ -44,7 +44,7 @@ public function isfeatured(){
 		
 		$query['commentcount']=$this->db->query("SELECT count(comment) as `commentcount` FROM `movie_usercomment` WHERE `user`='$user'")->row();
 	$query['commentcount']=$query['commentcount']->commentcount;
-	 $query['comment']=$this->db->query("SELECT `movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`,(UNIX_TIMESTAMP(`movie_usercomment`.`timestamp`)*1000) as `timestamp`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`user`='$user'")->result();
+	 $query['comment']=$this->db->query("SELECT distinct `movie_usercomment`.`movie`,`movie_movie`.`id`, `movie_movie`.`name` as `moviename`, `movie_movie`.`duration`, `movie_movie`.`dateofrelease`, `movie_movie`.`rating`, `movie_movie`.`director`, `movie_movie`.`writer`, `movie_movie`.`casteandcrew`, `movie_movie`.`summary`, `movie_movie`.`twittertrack`, `movie_movie`.`trailer`,(UNIX_TIMESTAMP(`movie_usercomment`.`timestamp`)*1000) as `timestamp`, `movie_movie`.`isfeatured`,`movie_movie`.`image`,`movie_movie`.`iscommingsoon`, `movie_movie`.`isintheator`,`movie_usercomment`.`comment` FROM `movie_movie` LEFT OUTER JOIN `movie_usercomment` ON `movie_usercomment`.`movie`=`movie_movie`.`id` WHERE `movie_usercomment`.`user`='$user' GROUP BY `movie_usercomment`.`movie`")->result();
 		return $query;
     }
   

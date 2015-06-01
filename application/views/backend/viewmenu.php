@@ -39,8 +39,7 @@
 						 ?>
 						</td>
 						<td><?php echo $row->order; ?></td>
-						<td> <a class="btn btn-primary btn-xs" href="<?php echo site_url('menu/editmenu?id=').$row->id;?>"><i class="icon-pencil"></i></a>
-                                      <a class="btn btn-danger btn-xs" href="<?php echo site_url('menu/deletemenu?id=').$row->id; ?>"><i class="icon-trash "></i></a>
+						<td> <a class="btn btn-primary btn-xs" href="<?php echo site_url('menu/editmenu?id=').$row->id;?>"><i class="icon-pencil"></i></a><a class="btn btn-danger btn-xs" onclick=\"return confirm('Are you sure you want to delete?');\" href="<?php echo site_url('menu/deletemenu?id=').$row->id; ?>"><i class="icon-trash "></i></a>
 									 
 					  </td>
 					</tr>
