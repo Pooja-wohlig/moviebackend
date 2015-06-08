@@ -104,7 +104,7 @@ else
                 </div>
             </div>
             <div class=" form-group">
-                <label class="col-sm-2 control-label" for="normal-field">Iscommingsoon</label>
+                <label class="col-sm-2 control-label" for="normal-field">Isnewreleased</label>
                 <div class="col-sm-4">
                     <?php echo form_dropdown( "iscommingsoon",$iscommingsoon,set_value( 'iscommingsoon',$before->iscommingsoon),"class='chzn-select form-control'");?>
                 </div>
